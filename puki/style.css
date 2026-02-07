@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+ box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    background-color: #f6f5f7;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+  
+h1{
+    font-weight: bold;
+    letter-spacing: -1.5px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+h1.title{
+    font-size: 45px;
+    line-height: 45px;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(16,64,74,0.5);
+}
+
+p{
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+    text-shadow: 0 0 10px rgba(16, 64, 74, 0);
+}
+
+span{
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+a{
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+    transition: 0.3s ease-in-out;
+}
+
+a:hover{
+    color: #4bb6b7;
+}
+
+.content{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: auto;
+}
+
+.content .checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.content input{
+    accent-color: #333;
+    width: 12px;
+    height: 12px;
+}
+
+.content label{
+    font-size: 14px;
+    user-select: none;
+}
+
+button{
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid #4bb6b7;
+    background-color: #4bb6b7;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 40px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover{
+    letter-spacing: 3px;
+}
+
+button:active{
+    transform: scale(0.95);
+}
+
+button:focus{
+    outline: none;
+}
+
+button.ghost{
+    /* background-color: rgba(255,255,255,0.2); */
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+button.ghost i{
+    position: absolute;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+button.ghost:hover i.register{
+    right: 70px;
+    opacity: 1;
+}
+
+button.ghost:hover i.login{
+    left: 70px;
+    opacity: 1;
+}
+
+form{
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+input{
+    background-color: #eeeeee;
+    border-radius: 100px;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;  
+    width: 100%;
+}
+
+/* right-align forgot link and ensure no white background */
+.pass-link{
+    text-align: right;
+    flex: 1;
+}
+.pass-link a{
+    color: #666;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: 13px;
+}
+
+/* social icons */
+.social-container{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 14px;
+}
+.social{
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #f0f0f0;
+    color: #555;
+    text-decoration: none;
+}
+
+/* make login button narrower and centered inside form */
+.login-container form > button{
+    width: 220px;
+    margin: 18px auto 0;
+    display: block;
+}
+.card{
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+                0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 400px;
+    margin-top: 40px; /* moved down */
+}
+
+/* slide animation: shift whole card left to reveal the register panel */
+/* panel-based sliding is handled by transforms on .login-container, .register-container and .overlay-container */
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.login-container{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+/* nudge the login heading down slightly */
+.login-container form h1{
+    margin-top: 20px;
+}
+
+/* nudge the register heading down slightly to match layout */
+.register-container form h1{
+    margin-top: 20px;
+}
+
+.container.right-panel-active .login-container{
+    transform: translateX(100%);
+}
+.register-container{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.right-panel-active .register-container{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes show{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.overlay-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container{
+    transform: translateX(-100%);
+}
+.overlay{
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    overflow: hidden;
+}
+
+/* background video covers the overlay area */
+.overlay .bg-video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    /* visible teal gradient overlay on top of the video so text is readable */
+    background: linear-gradient(to right, rgba(92, 196, 200, 0) 0%, rgba(77, 180, 186, 0) 60%);
+    z-index: 1;
+}
+.container.right-panel-active .overlay{
+    transform: translateX(50%);
+}
+
+/* Right panel visuals (use video behind + teal gradient) */
+.overlay-right{
+    background: transparent;
+    border-radius: 0 18px 18px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 30px;
+    gap: 10px;
+}
+
+.overlay-right h1{
+    color: #fff;
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 6px;
+}
+
+.overlay-right p{
+    color: rgba(255,255,255,0.95);
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    max-width: 320px;
+    margin: 0 0 20px;
+}
+
+.overlay-right .ghost{
+    border: 2px solid rgba(255,255,255,0.95);
+    background: transparent;
+    color: #fff;
+    padding: 10px 36px;
+    border-radius: 24px;
+    font-weight: 600;
+}
+
+.overlay-right .ghost{
+    width: 220px;
+    text-align: center;
+}
+
+.overlay-right .ghost:hover{
+    background: rgba(255,255,255,0.08);
+}
+
+/* Left panel visuals (big white heading, small desc, outlined Login button) */
+.overlay-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 30px;
+    gap: 12px;
+    color: #fff;
+}
+
+.overlay-left h1{
+    color: #fff;
+    font-size: 48px;
+    line-height: 1.05;
+    margin: 0 0 6px;
+    text-align: center;
+}
+
+.overlay-left p{
+    color: rgba(255,255,255,0.95);
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    max-width: 340px;
+    margin: 0 0 10px;
+}
+
+.overlay-left .ghost{
+    border: 2px solid rgba(255,255,255,0.95);
+    background: transparent;
+    color: #fff;
+    padding: 10px 36px;
+    border-radius: 24px;
+    font-weight: 600;
+    width: 200px;
+}
+
+.overlay-left .ghost:hover{
+    background: rgba(255,255,255,0.06);
+}
+.overlay-panel{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    z-index: 2; /* above video and overlay::before */
+}
+.overlay-left{
+    transform: translateX(-20%);
+}
+.container.right-panel-active .overlay-left{
+    transform: translateX(0);
+}
+.overlay-right{
+    right: 0;
+    left: auto;
+    transform: translateX(0);
+}
+.container.right-panel-active .overlay-right{
+    transform: translateX(20%);
+}
